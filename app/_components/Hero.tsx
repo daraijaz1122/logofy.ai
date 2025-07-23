@@ -13,12 +13,12 @@ const Hero = () => {
           <h2 className='font-bold text-5xl text-center '> { Lookup.SubHeading}</h2>
           <h2 className=' text-center text-lg text-gray-700'>{Lookup.Description}</h2>
          
-          <div className='flex gap-6 w-full max-w-2xl mt-10 items-center'>
+          <div className='flex gap-6 w-full max-w-2xl mt-10 justify-center items-center'>
               
               <input
                   onChange={(e)=>(setTitle(e.target.value) )}
           className='w-1/2 p-3 rounded-md shadow-md border'
-                  type="text" placeholder={Lookup.InputPlaceholder} />
+                  type="text" placeholder={Lookup.InputTitlePlaceholder} />
              <Link className='w-full' href={`/create?title=${title}`}>
               <Button
                   
