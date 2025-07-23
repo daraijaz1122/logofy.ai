@@ -6,44 +6,53 @@ import Prompt from '@/app/_data/Prompt';
 import { Loader2Icon } from 'lucide-react';
 import axios from 'axios';
 interface logoIdeaProps{
-  formData: {
+  data: {
     title: string;
     desc: string;
     palette: string;
     design: {
       title: string;
       prompt: string;
-      image:"string"
+      image: string;
     }
     idea: string;
   };
     onHandlerInputChange: (value: string) => void;
 }
-const LogoIdea = ({onHandlerInputChange,formData}:logoIdeaProps) => {
+const LogoIdea = ({onHandlerInputChange,data}:logoIdeaProps) => {
   const [ideas,setIdeas]=useState([]);
   const [loading,setLoading]=useState(false);
-  const [selectedOption,setSelectedOption]=useState(formData?.idea);
-  useEffect(()=>{
+  const [selectedOption, setSelectedOption] = useState(data?.idea);
+  
+  useEffect(() => {
     generateLogoDesignIdea();
   },[])
+
+ 
 
   const generateLogoDesignIdea=async()=>{
    
     setLoading(true)
     const PROMPT=Prompt.DESIGN_IDEA_PROMPT
-    .replace('{logoType}',formData?.design.title)
-    .replace('{logoTitle}',formData.title)
-    .replace('{logoDesc}',formData.desc)
-    .replace('{logoPrompt}',formData.design.prompt)
+    .replace('{logoType}',data?.design.title)
+    .replace('{logoTitle}',data?.title)
+    .replace('{logoDesc}',data?.desc)
+    .replace('{logoPrompt}',data?.design?.prompt)
 
-    // console.log(PROMPT);
-    const result=await axios.post('/api/ai-design-ideas',{
+    console.log(PROMPT, "prompt");
+    try {
+      const result=await axios.post('/api/ai_design_ideas',{
       prompt:PROMPT
     })
 
-    console.log(result.data)
-   !ideas&&setIdeas(result.data.ideas);
+   setIdeas(result.data.logo_ideas);
     setLoading(false);
+    } catch (e) {
+      setLoading(false);
+      console.log("some thing is up with you server",e)
+    }
+   
+    
   }
   
   return (
@@ -56,7 +65,8 @@ const LogoIdea = ({onHandlerInputChange,formData}:logoIdeaProps) => {
     {loading&&<Loader2Icon className='animate-spin my-10' />}
     </div>
     <div className='flex flex-wrap gap-3 mt-6'>
-      {ideas&&ideas.map((item:any,index:number)=>(
+        {ideas.map((item:string, index: number) => (
+        
         <h2 key={index}
         onClick={()=>{setSelectedOption(item);
           onHandlerInputChange(item)

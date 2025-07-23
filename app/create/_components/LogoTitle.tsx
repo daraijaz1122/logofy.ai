@@ -10,6 +10,7 @@ interface LogoTitleProps {
 const LogoTitle = ({ onHandlerInputChange }: LogoTitleProps) => {
   const searchParam = useSearchParams();
   const [title, setTitle] = useState(searchParam?.get('title') ?? "");
+  
   return (
       <div className='mt-10'>
           <HeadingDesciption
@@ -22,7 +23,10 @@ const LogoTitle = ({ onHandlerInputChange }: LogoTitleProps) => {
         placeholder={Lookup?.InputTitlePlaceholder}
         className='w-full p-4 border rounded-lg mt-5 '
         defaultValue={title}
-        onChange={(e)=>onHandlerInputChange(e.target.value)}
+        onChange={(e) => {
+          onHandlerInputChange(e.target.value)
+          setTitle(e.target.value)
+        }}
         />
           
     </div>
