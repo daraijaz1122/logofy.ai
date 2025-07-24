@@ -72,7 +72,7 @@ const LogoIdea = ({onHandlerInputChange,data}:logoIdeaProps) => {
           onHandlerInputChange(item)
         }}
         className={`p-2 rounded-full border px-3 cursor-pointer
-          hover:border-primary ${selectedOption==item&&'border-primary'}`}
+          hover:border-pink-600 ${selectedOption==item&&'border-pink-600'}`}
         >{item}</h2>
       ))}
       <h2 
@@ -80,7 +80,7 @@ const LogoIdea = ({onHandlerInputChange,data}:logoIdeaProps) => {
         onHandlerInputChange('Let AI Select the best idea')
       }}
       className={`p-2 rounded-full border px-3 cursor-pointer
-          hover:border-primary ${selectedOption=='Let AI Select the best idea'&&'border-primary'}`}>Let AI Select the best idea</h2>
+          hover:border-pink-600 ${selectedOption=='Let AI Select the best idea'&&'border-pink-600'}`}>Let AI Select the best idea</h2>
     </div>
     </div>
   )
