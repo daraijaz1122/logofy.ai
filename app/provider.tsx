@@ -18,7 +18,6 @@ const Provider = ({ children }: { children: ReactNode }) => {
       userName: user?.fullName,
       userEmail: user?.primaryEmailAddress?.emailAddress,
     });
-    console.log(result);
     setUserDetail(result?.data);
   };
   return (
